@@ -1,37 +1,71 @@
 import React from "react";
 import PlayPause from "./PlayPause";
+import { Link, useParams } from "react-router-dom";
 
-const SongCard = ({ image, title, artist, index, album, playlist, preview, songID, songList }) => {
+const SongCard = ({
+  image,
+  title,
+  artist,
+  index,
+  album,
+  playlist,
+  preview,
+  songID,
+  songList,
+  song,
+  albumId,
+  playlistId,
+  artistId,
+  strictWidth
+}) => {
+
+  let route = null;
+  if (song) route = `/song/${songID}`;
+  else if (album) route = `/album/${albumId}`;
+  else route = `/playlist/${playlistId}`;
 
   return (
     <div
       key={index}
-      className="min-w-[15rem] rounded-lg bg-[#1f235c] p-4 shadow-sm shadow-black/50 transition-transform duration-200 hover:scale-105"
-
+      className={`${strictWidth ? "max-w-[15rem]" : "min-w-[15rem]"}  rounded-lg bg-[#1f235c] p-4 shadow-sm shadow-black/50 transition-transform duration-200 hover:scale-105`}
     >
-      <div className="relative group">
-      <img
-      
-        draggable="false"
-        src={
-          album || playlist
-            ? image
-            : `https://e-cdns-images.dzcdn.net/images/cover/${image}/1000x1000.jpg`
-        }
-        alt="songImg"
-        className="rounded-lg"
-      />
-      {album || playlist ? 
-                null 
-                : 
-                <PlayPause songID={songID} preview={preview} songCard songList={songList}/>}
+      <div className="group relative">
+        <img
+          draggable="false"
+          src={
+            album || playlist
+              ? image
+              : `https://e-cdns-images.dzcdn.net/images/cover/${image}/1000x1000.jpg`
+          }
+          alt="songImg"
+          className="rounded-lg"
+        />
+        {album || playlist ? null : (
+          <PlayPause
+            songID={songID}
+            preview={preview}
+            songCard
+            songList={songList}
+          />
+        )}
       </div>
-      <h2 className="mt-4 truncate font-bold text-gray-300 hover:cursor-pointer">
+
+      {
+        route ?
+        <Link draggable={false} onDragStart={(e) => e.preventDefault()} to={route} className="select-none">
+      <h2  className="mt-4 truncate font-bold text-gray-300 hover:cursor-pointer select-none">
         {title}
       </h2>
-      <h3 className="truncate text-sm text-gray-400 hover:cursor-pointer">
+      </Link>
+      : null
+      }
+
+
+      <Link to={`/artist/${artistId}`} draggable={false} onDragStart={(e) => e.preventDefault()} className="select-none">
+      <h3 className="truncate text-sm text-gray-400 hover:cursor-pointer select-none">
         {artist}
       </h3>
+      </Link>
     </div>
   );
 };

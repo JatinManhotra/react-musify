@@ -14,11 +14,7 @@ const Discover = () => {
     dragDiv,
     dragging,dispatch,playlistData} = useContext(PlayerContext)
 
-    // const playlistsData = useSelector((state)=>state.player.playlistsData);
-    
-    
-    // console.log(playlistsData)
-//   console.log(top10data);
+    // console.log(albums)
 
   return (
     <section className="hide-scrollbar absolute top-20 left-55 h-[87%] w-[50%] overflow-y-scroll">
@@ -35,10 +31,12 @@ const Discover = () => {
             image={item?.md5_image}
             title={item?.title}
             artist={item?.artist?.name}
+            artistId={item.artist.id}
             index={index}
             preview={item?.preview}
             songID={item?.id}
             songList={top10data.data}
+            song
           />
         ))}
       </div>
@@ -56,6 +54,8 @@ const Discover = () => {
             image={item?.album?.cover_xl}
             title={item?.album?.title}
             artist={item?.artist?.name}
+            artistId={item?.artist?.id}
+            albumId = {item?.album?.id}
             index={index}
             album
           />
@@ -75,6 +75,7 @@ const Discover = () => {
             image={item?.picture_xl}
             title={item?.title}
             index={index}
+            playlistId={item?.id}
             playlist
           />
         ))}

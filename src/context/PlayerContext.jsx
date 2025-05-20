@@ -75,26 +75,31 @@ const PlayerContextProvider = ({ children }) => {
 
 
   function playNext() {
-    const index = currentSongsList.findIndex(song => song.id === currentSongID);
-    if (index === -1 || index === currentSongsList.length - 1) return;
-  
-    const nextSong = currentSongsList[index + 1];
-    if (nextSong) {
-      dispatch(setPreviewUrl(nextSong.preview));
-      dispatch(setPlaying({ isPlaying: true, songID: nextSong.id }));
-    }
+  const index = currentSongsList.findIndex(song => song.id === currentSongID);
+  if (index === -1) return;
+
+  const nextIndex = (index + 1) % currentSongsList.length;
+  const nextSong = currentSongsList[nextIndex];
+
+  if (nextSong) {
+    dispatch(setPreviewUrl(nextSong.preview));
+    dispatch(setPlaying({ isPlaying: true, songID: nextSong.id }));
   }
-  
-  function playPrevious() {
-    const index = currentSongsList.findIndex(song => song.id === currentSongID);
-    if (index <= 0) return;
-  
-    const prevSong = currentSongsList[index - 1];
-    if (prevSong) {
-      dispatch(setPreviewUrl(prevSong.preview));
-      dispatch(setPlaying({ isPlaying: true, songID: prevSong.id }));
-    }
+}
+
+function playPrevious() {
+  const index = currentSongsList.findIndex(song => song.id === currentSongID);
+  if (index === -1) return;
+
+  const prevIndex =
+    index === 0 ? currentSongsList.length - 1 : index - 1;
+  const prevSong = currentSongsList[prevIndex];
+
+  if (prevSong) {
+    dispatch(setPreviewUrl(prevSong.preview));
+    dispatch(setPlaying({ isPlaying: true, songID: prevSong.id }));
   }
+}
 
 
   const handlePreviewUrl = (preview) => {
