@@ -37,17 +37,17 @@ const App = () => {
 
       <Routes>
         <Route path='/' element={<Discover />}/>
-        <Route path='/song/:id' element={<SongDetails />}/>
+        {/* <Route path='/song/:id' element={<SongDetails />}/>
         <Route path='/artist/:id' element={<ArtistDetails />}/>
         <Route path='/artist/:id/songs' element={<ArtistSongs />}/>
         <Route path='/album/:id' element={<AlbumDetails />}/>
         <Route path='/playlist/:id' element={<PlaylistDetails/>}/>
         <Route path='/search' element={<SearchResults/>}/>
-        <Route path='*' />
+        <Route path='*' /> */}
       </Routes>
 
       {
-        showSideComponents && <section className='absolute top-10 right-5 bottom-5 overflow-y-scroll hide-scrollbar'>
+        showSideComponents && <section className='xl:absolute xl:top-10 xl:right-5 xl:bottom-5 overflow-y-scroll p-2 xl:p-0 hide-scrollbar'>
         <TopCharts />
         <TopArtists />
       </section>

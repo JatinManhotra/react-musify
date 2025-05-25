@@ -7,8 +7,8 @@ import SongCardSkeleton from "../skeleton/SongCardSkeleton";
 import DiscoverSkeleton from "../skeleton/DiscoverSkeleton";
 
 const Discover = () => {
-
-  const {albums,
+  const {
+    albums,
     top10data,
     top10Fetching,
     top10Error,
@@ -16,24 +16,27 @@ const Discover = () => {
     scrollableDivRef2,
     scrollableDivRef3,
     dragDiv,
-    dragging,dispatch,playlistData,playlistFetching,albumsFetching} = useContext(PlayerContext)
+    dragging,
+    dispatch,
+    playlistData,
+    playlistFetching,
+    albumsFetching,
+  } = useContext(PlayerContext);
 
-    // console.log(albums)
+  // console.log(albums)
 
-    if(top10Fetching || albumsFetching || playlistFetching){
-      return(
-        <DiscoverSkeleton/>
-      )
-    }
+  if (top10Fetching || albumsFetching || playlistFetching) {
+    return <DiscoverSkeleton />;
+  }
 
   return (
-    <section className="hide-scrollbar animate-left absolute top-20 left-55 h-[87%] w-[50%] overflow-y-scroll">
-      <h1 className="text-3xl font-bold text-white">Discover</h1>
+    <section className="hide-scrollbar animate-left mt-5 overflow-y-scroll px-4 xl:absolute xl:top-20 xl:left-55 xl:h-[87%] xl:w-[50%] xl:px-0">
+      <h1 className="text-2xl font-bold text-white xl:text-3xl">Discover</h1>
       <div
         ref={scrollableDivRef1}
         onMouseMove={(e) => dragDiv(e, scrollableDivRef1)}
         onMouseDown={() => dispatch(setDragging(true))}
-        className={`hide-scrollbar mb-5 flex shrink-0 gap-5 overflow-x-scroll py-4 select-none ${dragging ? "cursor-grab" : "cursor-default"}`}
+        className={`hide-scrollbar mb-5 flex shrink-0 gap-3 overflow-x-scroll py-4 select-none xl:gap-5 ${dragging ? "cursor-grab" : "cursor-default"}`}
       >
         {top10data?.data?.map((item, index) => (
           <SongCard
@@ -53,12 +56,14 @@ const Discover = () => {
         ))}
       </div>
 
-      <h1 className="text-3xl font-bold text-white">Popular Albums</h1>
+      <h1 className="text-2xl font-bold text-white xl:text-3xl">
+        Popular Albums
+      </h1>
       <div
         ref={scrollableDivRef2}
         onMouseMove={(e) => dragDiv(e, scrollableDivRef2)}
         onMouseDown={() => dispatch(setDragging(true))}
-        className={`hide-scrollbar mb-5 flex shrink-0 gap-5 overflow-x-scroll py-4 select-none ${dragging ? "cursor-grab" : "cursor-default"}`}
+        className={`hide-scrollbar mb-5 flex shrink-0 gap-3 overflow-x-scroll py-4 select-none xl:gap-5 ${dragging ? "cursor-grab" : "cursor-default"}`}
       >
         {albums?.map((item, index) => (
           <SongCard
@@ -67,30 +72,36 @@ const Discover = () => {
             title={item?.album?.title}
             artist={item?.artist?.name}
             artistId={item?.artist?.id}
-            albumId = {item?.album?.id}
+            albumId={item?.album?.id}
             index={index}
             album
           />
         ))}
       </div>
 
-      <h1 className="text-3xl font-bold text-white">Check out playlists!</h1>
+      <h1 className="text-2xl font-bold text-white xl:text-3xl">
+        Check out playlists!
+      </h1>
       <div
         ref={scrollableDivRef3}
         onMouseMove={(e) => dragDiv(e, scrollableDivRef3)}
         onMouseDown={() => dispatch(setDragging(true))}
-        className={`hide-scrollbar mb-5 flex shrink-0 gap-5 overflow-x-scroll py-4 select-none ${dragging ? "cursor-grab" : "cursor-default"}`}
+        className={`hide-scrollbar mb-5 flex shrink-0 gap-3 overflow-x-scroll py-4 select-none xl:gap-5 ${dragging ? "cursor-grab" : "cursor-default"}`}
       >
         {playlistData?.map((item, index) => (
-          <SongCard
+          <div
             key={item?.id || index}
-            image={item?.picture_xl}
-            title={item?.title}
-            index={index}
-            playlistId={item?.id}
-            playlist
-            strictWidth
-          />
+            className="min-w-[12rem] xl:min-w-[15rem]" 
+          >
+            <SongCard
+              image={item?.picture_xl}
+              title={item?.title}
+              index={index}
+              playlistId={item?.id}
+              playlist
+              strictWidth
+            />
+          </div>
         ))}
       </div>
     </section>
