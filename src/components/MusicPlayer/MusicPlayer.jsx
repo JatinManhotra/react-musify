@@ -4,6 +4,7 @@ import PlayerControls from "./PlayerControls";
 import VolumeControl from "./VolumeControl";
 import { PlayerContext } from "../../context/PlayerContext";
 import { CiMinimize1 } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const MusicPlayer = () => {
   const { audioRef } = useContext(PlayerContext);
@@ -57,12 +58,15 @@ const MusicPlayer = () => {
           />
         )}
         <div className="max-w-50">
+          <Link to={`/song/${currentPlayingSong?.id}`}>
           <h2 className="truncate font-bold text-gray-300 hover:cursor-pointer">
             {currentPlayingSong?.title}
-          </h2>
+          </h2></Link>
+         <Link to={`/artist/${currentPlayingSong?.artist?.id}`}>
           <h3 className="truncate text-sm text-gray-400 hover:cursor-pointer">
             {currentPlayingSong?.artist?.name}
           </h3>
+         </Link>
         </div>
       </div>
           

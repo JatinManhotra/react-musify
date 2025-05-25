@@ -17,7 +17,7 @@ const PlayPause = ({ songCard, preview, songID, topCharts, songList }) => {
     {
       songCard || topCharts ? 
       <div
-      className={`${songCard ? "absolute top-0  right-0 bottom-0 left-0 rounded-lg hover:bg-black/50" : " "} ${isClickedSongPlaying ? "bg-black/50  " : " "} ${topCharts ?"bg-transparent  " :  "  "}`}
+      className={`${songCard ? "absolute top-0  right-0 bottom-0 left-0 rounded-lg hover:bg-black/50" : " "} ${isClickedSongPlaying ? "bg-black/50  " : " "} ${topCharts ?"bg-transparent cursor-pointer  " :  "  "}`}
     >
       <div
         className={`${songCard ? "absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white opacity-0 group-hover:opacity-100 hover:cursor-pointer" : ""} ${isClickedSongPlaying ? "opacity-100" : ""}`}

@@ -7,6 +7,8 @@ const initialState = {
     isPlaying: false,
     currentSongID: null,
     artistData: null,
+    searchResults: null,
+    searchResultsStatus: {},
     // playlistsData: [],
 };
 
@@ -30,11 +32,18 @@ export const playerSlice = createSlice({
         setArtistData: (state, action)=>{
             state.artistData = action.payload;
         },
+        setSearchResults: (state, action)=>{
+            state.searchResults = action.payload;
+        },
+        setSearchResultsStatus: (state, action)=>{
+            state.searchResultsStatus.isFetching = action.payload.isFetching;
+            state.searchResultsStatus.error = action.payload.error;
+        },
         // setPlaylistsData: (state, action)=>{
         //     state.playlistsData = action.payload;
         // },
     }
 })
 
-export const  {setCurrentSongsList, setDragging, setPreviewUrl, setPlaying, setArtistData } = playerSlice.actions;
+export const  {setCurrentSongsList, setDragging, setPreviewUrl, setPlaying, setArtistData, setSearchResults, setSearchResultsStatus } = playerSlice.actions;
 export default playerSlice.reducer

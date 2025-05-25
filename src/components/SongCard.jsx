@@ -1,6 +1,7 @@
 import React from "react";
 import PlayPause from "./PlayPause";
 import { Link, useParams } from "react-router-dom";
+import SongCardSkeleton from "../skeleton/SongCardSkeleton";
 
 const SongCard = ({
   image,
@@ -16,7 +17,8 @@ const SongCard = ({
   albumId,
   playlistId,
   artistId,
-  strictWidth
+  strictWidth,
+
 }) => {
 
   let route = null;
@@ -24,6 +26,7 @@ const SongCard = ({
   else if (album) route = `/album/${albumId}`;
   else route = `/playlist/${playlistId}`;
 
+  
   return (
     <div
       key={index}
@@ -32,13 +35,14 @@ const SongCard = ({
       <div className="group relative">
         <img
           draggable="false"
+          
           src={
             album || playlist
               ? image
               : `https://e-cdns-images.dzcdn.net/images/cover/${image}/1000x1000.jpg`
           }
           alt="songImg"
-          className="rounded-lg"
+          className="rounded-lg w-[14rem] h-[14rem] object-cover"
         />
         {album || playlist ? null : (
           <PlayPause

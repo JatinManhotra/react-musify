@@ -1,0 +1,29 @@
+import React from 'react'
+
+const TopChartsSkeleton = () => {
+  return (
+    <section className='w-[28rem]'>
+        <h1 className='text-2xl mb-4 font-bold bg-gray-800 w-70 animate-pulse h-8 rounded-2xl'></h1>
+        <div>
+          <div className='my-4 flex items-center h-17 justify-between px-4 py-2 rounded-lg bg-gray-800 animate-pulse mt-2 pr-8'>
+           
+          </div>
+          <div className='my-4 flex items-center h-17 justify-between px-4 py-2 rounded-lg bg-gray-800 animate-pulse mt-2 pr-8'>
+            
+      
+          </div>
+          <div className='my-4 flex items-center h-17 justify-between px-4 py-2 rounded-lg bg-gray-800 animate-pulse mt-2 pr-8'>
+            
+          </div>
+          <div className='my-4 flex items-center h-17 justify-between px-4 py-2 rounded-lg bg-gray-800 animate-pulse mt-2 pr-8'>
+            
+          </div>
+          <div className='flex items-center h-17 justify-between px-4 py-2 rounded-lg bg-gray-800 animate-pulse mt-2 pr-8'>
+            
+          </div>
+        </div>
+      </section>
+  )
+}
+
+export default TopChartsSkeleton

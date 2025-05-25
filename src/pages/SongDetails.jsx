@@ -3,13 +3,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetSongDetailsQuery } from "../redux/services/deezer";
 import PlayPause from "../components/PlayPause";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import SongDetailsSkeleton from "../skeleton/SongDetailsSkeleton";
 
 const SongDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: songData } = useGetSongDetailsQuery(id);
+  const { data: songData, isFetching, error } = useGetSongDetailsQuery(id);
   // console.log(songData)
+  if(isFetching){
+    return <SongDetailsSkeleton/>
+  }
 
   return songData ? (
     <>
@@ -22,7 +26,7 @@ const SongDetails = () => {
         <p className="text-xl text-white">Back</p>
       </div>
 
-      <section className="hide-scrollbar absolute top-35 left-55 h-[78%] w-[83%] overflow-y-scroll pb-10">
+      <section className="hide-scrollbar animate-left absolute top-35 left-55 h-[78%] w-[83%] overflow-y-scroll pb-10">
         <div className="flex items-center gap-5">
           <div className="group relative h-40 w-40 rounded-full text-white">
             <img

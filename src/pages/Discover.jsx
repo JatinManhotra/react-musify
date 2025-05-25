@@ -3,21 +3,31 @@ import SongCard from "../components/SongCard";
 import { setDragging } from "../redux/slice/playerSlice";
 import { PlayerContext } from "../context/PlayerContext";
 import { useSelector } from "react-redux";
+import SongCardSkeleton from "../skeleton/SongCardSkeleton";
+import DiscoverSkeleton from "../skeleton/DiscoverSkeleton";
 
 const Discover = () => {
 
   const {albums,
     top10data,
+    top10Fetching,
+    top10Error,
     scrollableDivRef1,
     scrollableDivRef2,
     scrollableDivRef3,
     dragDiv,
-    dragging,dispatch,playlistData} = useContext(PlayerContext)
+    dragging,dispatch,playlistData,playlistFetching,albumsFetching} = useContext(PlayerContext)
 
     // console.log(albums)
 
+    if(top10Fetching || albumsFetching || playlistFetching){
+      return(
+        <DiscoverSkeleton/>
+      )
+    }
+
   return (
-    <section className="hide-scrollbar absolute top-20 left-55 h-[87%] w-[50%] overflow-y-scroll">
+    <section className="hide-scrollbar animate-left absolute top-20 left-55 h-[87%] w-[50%] overflow-y-scroll">
       <h1 className="text-3xl font-bold text-white">Discover</h1>
       <div
         ref={scrollableDivRef1}
@@ -37,6 +47,8 @@ const Discover = () => {
             songID={item?.id}
             songList={top10data.data}
             song
+            isFetching={top10Fetching}
+            error={top10Error}
           />
         ))}
       </div>
@@ -77,6 +89,7 @@ const Discover = () => {
             index={index}
             playlistId={item?.id}
             playlist
+            strictWidth
           />
         ))}
       </div>

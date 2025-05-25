@@ -8,6 +8,18 @@ import TopArtists from './components/TopArtists'
 import MusicPlayer from './components/MusicPlayer/MusicPlayer';
 import SongDetails from './pages/SongDetails'
 import ArtistDetails from './pages/ArtistDetails'
+import ArtistSongs from './pages/ArtistSongs'
+import AlbumDetails from './pages/AlbumDetails'
+import PlaylistDetails from './pages/PlaylistDetails'
+import SearchResults from './pages/SearchResults'
+import SearchResultsSkeleton from './skeleton/SearchResultsSkeleton'
+import DiscoverSkeleton from './skeleton/DiscoverSkeleton'
+import TopChartsSkeleton from './skeleton/TopChartsSkeleton'
+import TopArtistsSkeleton from './skeleton/TopArtistsSkeleton'
+import SongDetailsSkeleton from './skeleton/SongDetailsSkeleton'
+import ArtistDetailsSkeleton from './skeleton/ArtistDetailsSkeleton'
+import AlbumDetailsSkeleton from './skeleton/AlbumDetailsSkeleton'
+import PlaylistDetailsSkeleton from './skeleton/PlaylistDetailsSkeleton'
 
 const App = () => {
 
@@ -27,6 +39,10 @@ const App = () => {
         <Route path='/' element={<Discover />}/>
         <Route path='/song/:id' element={<SongDetails />}/>
         <Route path='/artist/:id' element={<ArtistDetails />}/>
+        <Route path='/artist/:id/songs' element={<ArtistSongs />}/>
+        <Route path='/album/:id' element={<AlbumDetails />}/>
+        <Route path='/playlist/:id' element={<PlaylistDetails/>}/>
+        <Route path='/search' element={<SearchResults/>}/>
         <Route path='*' />
       </Routes>
 

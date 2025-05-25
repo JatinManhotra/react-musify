@@ -13,6 +13,10 @@
     display: none;
 }
 
+html::-webkit-scrollbar{
+    display: none;
+}
+
 *{
     box-sizing: border-box;
     font-family: outfit, sans-serif;
@@ -62,6 +66,13 @@ body{
   border: none;
 }
 
+@layer utilities {
+   input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+}
+
 @keyframes animate-up{
     from{
         transform: translateY(100%);
@@ -75,4 +86,19 @@ body{
 
 .animate-up{
     animation: animate-up .5s ease-in-out normal;
+}
+
+@keyframes animate-left{
+    from{
+        transform: translateX(5%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-left{
+    animation: animate-left .5s ease-in-out normal;
 }
