@@ -47,7 +47,7 @@ const PlayPause = ({ songCard, preview, songID, topCharts, songList }) => {
           {isPlaying ? (
             <div className="group flex flex-col items-center">
               <FaPause
-                className="rounded-full border border-white p-1.5 xl:p-2 text-4xl xl:text-5xl"
+                className="rounded-full border  border-white p-1.5 xl:p-2 text-4xl xl:text-5xl"
                 onClick={togglePlay}
               />
               <p className="player-controls-tooltip top-15">Pause</p>

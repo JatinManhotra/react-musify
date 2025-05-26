@@ -8,7 +8,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const SidebarSkeleton = () => {
   return (
-    <aside className="absolute top-0 bottom-0 left-0 w-[12rem] bg-[#141414] p-4"></aside>
+    <aside className="hidden xl:block absolute top-0 bottom-0 left-0 w-[12rem] bg-[#141414] p-4"></aside>
   );
 };
 

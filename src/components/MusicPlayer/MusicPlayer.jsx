@@ -40,11 +40,11 @@ const MusicPlayer = () => {
 
   return (
     <section
-      className={`${hidePlayer ? "hidden" : "flex"} animate-up fixed right-0 bottom-0 left-0 z-10 h-28 justify-between rounded-t-3xl bg-gradient-to-br from-white/10 to-[#2a2a80] px-6 backdrop-blur-lg`}
+      className={`${hidePlayer ? "-bottom-[7.5rem] opacity-0" : "bottom-0 opacity-100"} fixed right-0 left-0 z-10 flex h-30 justify-between rounded-t-3xl bg-gradient-to-br from-white/10 to-[#2a2a80] px-6 backdrop-blur-lg transition-all duration-500 xl:h-28`}
     >
       {previewUrl && <audio ref={audioRef} src={previewUrl} />}
 
-      <div className=" w-full hidden xl:flex xl:max-w-[20rem] items-center gap-4">
+      <div className="hidden w-full items-center gap-4 xl:flex xl:max-w-[20rem]">
         {currentPlayingSong && (
           <img
             src={`https://e-cdns-images.dzcdn.net/images/cover/${currentPlayingSong.md5_image}/1000x1000.jpg
@@ -71,8 +71,14 @@ const MusicPlayer = () => {
       </div>
 
       <PlayerControls />
-
-      {/* <VolumeControl /> */}
+      <div className="absolute top-2 left-[50%] block max-w-[11.875rem] translate-x-[-50%] xl:hidden">
+        <Link to={`/song/${currentPlayingSong?.id}`}>
+          <h2 className="truncate text-xs font-bold text-gray-300 hover:cursor-pointer">
+            {currentPlayingSong?.title}
+          </h2>
+        </Link>
+      </div>
+      <VolumeControl />
       <CiMinimize1
         onClick={() => setHidePlayer(true)}
         className="absolute top-3 right-5 cursor-pointer text-xl text-white"

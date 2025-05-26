@@ -1,29 +1,25 @@
-import React from 'react'
+import React from "react";
 
 const TopArtistsSkeleton = () => {
   return (
-     <section className="w-[28rem] mt-5 ">
-        <h1 className="text-2xl font-bold animate-pulse bg-gray-800 h-8 w-70 rounded-2xl"></h1>
-        <div className="flex gap-5 mt-4 h-40 items-start overflow-x-scroll hide-scrollbar select-none">
-          <div className="shrink-0 w-30 animate-pulse h-30 group">
-            <div className="bg-gray-800 rounded-full w-30 h-30"></div>
-            
-          </div>
-          <div className="shrink-0 w-30 animate-pulse h-30 group">
-            <div className="bg-gray-800 rounded-full w-30 h-30"></div>
-            
-          </div>
-          <div className="shrink-0 w-30 animate-pulse h-30 group">
-            <div className="bg-gray-800 rounded-full w-30 h-30"></div>
-            
-          </div>
-          <div className="shrink-0 w-30 animate-pulse h-30 group">
-            <div className="bg-gray-800 rounded-full w-30 h-30"></div>
-            
-          </div>
+    <section className="mt-5 overflow-x-hidden xl:w-[28rem]">
+      <h1 className="mb-4 h-6 w-40 animate-pulse rounded-2xl bg-gray-800 text-3xl font-bold xl:h-8 xl:w-70"></h1>
+      <div className="hide-scrollbar mt-4 flex h-40 items-start gap-5 overflow-x-scroll select-none">
+        <div className="group h-25 w-25 shrink-0 animate-pulse xl:h-30 xl:w-30">
+          <div className="h-25 w-25 rounded-full bg-gray-800 xl:h-30 xl:w-30"></div>
         </div>
-      </section>
-  )
-}
+        <div className="group h-25 w-25 shrink-0 animate-pulse xl:h-30 xl:w-30">
+          <div className="xl:w-30 rounded-full h-25 w-25 bg-gray-800 xl:h-30"></div>
+        </div>
+        <div className="group xl:w-30shrink-0 h-25 w-25 animate-pulse xl:h-30">
+          <div className="h-25 w-25 rounded-full bg-gray-800 xl:h-30 xl:w-30"></div>
+        </div>
+        <div className="group h-25 w-25 shrink-0 animate-pulse xl:h-30 xl:w-30">
+          <div className="h-25 w-25 rounded-full bg-gray-800 xl:h-30 xl:w-30"></div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default TopArtistsSkeleton
+export default TopArtistsSkeleton;

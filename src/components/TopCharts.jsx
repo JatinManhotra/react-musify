@@ -31,10 +31,10 @@ const TopCharts = () => {
               />
               <div>
                 <Link to={`/song/${item.id}`}>
-                  <h2 className="truncate text-sm xl:text-lg font-bold">{item?.title}</h2>
+                  <h2 className="truncate w-35 text-sm xl:text-lg font-bold">{item?.title}</h2>
                 </Link>
                 <Link to={`/artist/${item.artist.id}`}>
-                  <h3 className="truncate text-xs xl:text-sm text-gray-300">
+                  <h3 className="truncate w-35 text-xs xl:text-sm text-gray-300">
                     {item?.artist?.name}
                   </h3>
                 </Link>

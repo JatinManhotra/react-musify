@@ -1,64 +1,82 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetArtistQuery, useGetSearchResultsQuery } from '../redux/services/deezer';
-import { IoIosArrowRoundBack } from 'react-icons/io';
-import SongCard from '../components/SongCard';
+import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useGetArtistQuery,
+  useGetSearchResultsQuery,
+} from "../redux/services/deezer";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import SongCard from "../components/SongCard";
+import { useSelector } from "react-redux";
+import PlayPause from "../components/PlayPause";
+import ErrorPage from "./ErrorPage";
 
 const ArtistSongs = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    const navigate = useNavigate();
-      const { id } = useParams();
-    
-      const { data: artistData } = useGetArtistQuery(id);
-      const artistName = artistData?.name;
-    
-      const { data: searchResults } = useGetSearchResultsQuery(artistName, {
-        skip: !artistName,
-      });
-      const searchResultsData = searchResults?.data;
+  const { data: artistData, error } = useGetArtistQuery(id);
+  const artistName = artistData?.name;
 
-  return artistData || searchResultsData ?(
+    const {currentSongID, isPlaying} = useSelector((state)=>state.player)
 
+  const { data: searchResults } = useGetSearchResultsQuery(artistName, {
+    skip: !artistName,
+  });
+  const searchResultsData = searchResults?.data;
+
+  if(error){
+    return <ErrorPage/>
+  }
+
+  return artistData || searchResultsData ? (
     <>
-      <div className="absolute top-20 left-55 mb-4 flex items-center gap-4">
+      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
         <IoIosArrowRoundBack
-          className="cursor-pointer rounded-full border-2 border-white text-gray-400"
-          size={40}
+          className="cursor-pointer rounded-full border-2 border-white text-3xl text-gray-400 xl:text-4xl"
           onClick={() => navigate(-1)}
         />
-        <p className="text-xl text-white">Back</p>
+        <p className="text-lg text-white xl:text-xl">Back</p>
       </div>
 
-      <section className="hide-scrollbar absolute top-35 left-55 h-[78%] w-[84%] overflow-y-scroll pb-10">
-        
-
-      
-          
-
-          <div className="flex w-full flex-wrap gap-5">
-            {searchResultsData?.map((item, index) => (
-              <SongCard
-                key={item?.id || index}
-                image={item?.md5_image}
-                title={item?.title}
-                artist={item?.artist?.name}
-                artistId={item.artist.id}
-                index={index}
-                preview={item?.preview}
-                songID={item?.id}
-                songList={searchResultsData}
-                song
-                strictWidth
-              />
-            ))}
-          </div>
-    
-
-       
+      <section className="hide-scrollbar animate-left px-2 xl:absolute xl:top-35 xl:left-55 xl:h-[78%] xl:w-[84%] overflow-y-scroll pb-10">
+        <div >
+          {searchResultsData?.map((item, index) => (
+             <div
+                key={index}
+                className={`mt-2 flex items-center justify-between rounded-lg px-2 py-2 text-white xl:px-4 xl:pr-8 xl:hover:bg-[#4b456e] ${item.id === currentSongID && isPlaying ? "bg-[#4b456e]" : ""}`}
+              >
+                <div className="flex items-center gap-4">
+                  <p>{index + 1}.</p>
+                  <img
+                    className="w-12 rounded-lg xl:w-15"
+                    src={`https://e-cdns-images.dzcdn.net/images/cover/${item?.md5_image}/1000x1000.jpg`}
+                    alt="topCharts"
+                  />
+                  <div>
+                    <Link to={`/song/${item.id}`}>
+                      <h2 className="truncate text-sm w-35 font-bold xl:text-lg">
+                        {item?.title}
+                      </h2>
+                    </Link>
+                    <Link to={`/artist/${item.artist.id}`}>
+                      <h3 className="truncate text-xs w-35 text-gray-300 xl:text-sm">
+                        {item?.artist?.name}
+                      </h3>
+                    </Link>
+                  </div>
+                </div>
+                <PlayPause
+                  topCharts
+                  preview={item.preview}
+                  songID={item.id}
+                  songList={searchResultsData}
+                />
+              </div>
+          ))}
+        </div>
       </section>
     </>
-  )
-  : null
-}
+  ) : null;
+};
 
-export default ArtistSongs
+export default ArtistSongs;

@@ -4,6 +4,7 @@ import { useGetSongDetailsQuery } from "../redux/services/deezer";
 import PlayPause from "../components/PlayPause";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import SongDetailsSkeleton from "../skeleton/SongDetailsSkeleton";
+import ErrorPage from "./ErrorPage";
 
 const SongDetails = () => {
   const { id } = useParams();
@@ -11,29 +12,32 @@ const SongDetails = () => {
 
   const { data: songData, isFetching, error } = useGetSongDetailsQuery(id);
   // console.log(songData)
-  if(isFetching){
-    return <SongDetailsSkeleton/>
+  if (isFetching) {
+    return <SongDetailsSkeleton />;
+  }
+
+  if(error){
+    return <ErrorPage/>
   }
 
   return songData ? (
     <>
-      <div className="absolute top-20 left-55 mb-4 flex items-center gap-4">
+      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
         <IoIosArrowRoundBack
-          className="cursor-pointer rounded-full border-2 border-white text-gray-400"
-          size={40}
+          className="cursor-pointer rounded-full border-2 border-white text-3xl text-gray-400 xl:text-4xl"
           onClick={() => navigate(-1)}
         />
-        <p className="text-xl text-white">Back</p>
+        <p className="text-lg text-white xl:text-xl">Back</p>
       </div>
 
-      <section className="hide-scrollbar animate-left absolute top-35 left-55 h-[78%] w-[83%] overflow-y-scroll pb-10">
+      <section className="hide-scrollbar animate-left overflow-y-scroll px-4 pb-10 xl:absolute xl:top-35 xl:left-55 xl:h-[78%] xl:w-[83%]">
         <div className="flex items-center gap-5">
-          <div className="group relative h-40 w-40 rounded-full text-white">
+          <div className="group relative w-full max-w-30 rounded-full text-white xl:h-40 xl:w-40">
             <img
               draggable="false"
               src={`https://e-cdns-images.dzcdn.net/images/cover/${songData.md5_image}/1000x1000.jpg`}
               alt={songData.title}
-              className="h-40 w-40 rounded-full border-4 border-white"
+              className="rounded-full border-4 border-white object-cover xl:h-40 xl:w-40"
             />
             <PlayPause
               songID={songData.id}
@@ -43,19 +47,19 @@ const SongDetails = () => {
           </div>
 
           <div>
-            <h1 className="mb-2 text-3xl font-bold text-white">
+            <h1 className="mb-2 text-lg font-bold text-white xl:text-3xl">
               {songData.title}
             </h1>
-            <h2 className="mb-2 text-xl text-white">
-              Released on{" "}
-              <span className="ml-1 text-lg text-gray-400">
+            <h2 className="mb-2 text-white xl:text-xl">
+              Released on <br className="block xl:hidden" />
+              <span className="ml-1 text-sm text-gray-400 xl:text-lg">
                 {" "}
                 {songData.release_date}
               </span>
             </h2>
-            <h3 className="text-lg text-white">
+            <h3 className="text-white xl:text-lg">
               Rank{" "}
-              <span className="ml-1 text-base text-gray-400">
+              <span className="ml-1 text-sm text-gray-400 xl:text-base">
                 {songData.rank}
               </span>
             </h3>
@@ -64,28 +68,30 @@ const SongDetails = () => {
 
         <div className="mt-15">
           {songData.contributors && (
-            <h1 className="mb-8 text-3xl font-bold text-white">Contributors</h1>
+            <h1 className="mb-8 text-2xl font-bold text-white xl:text-3xl">
+              Contributors
+            </h1>
           )}
 
           <div className="flex flex-wrap gap-10">
             {songData.contributors?.map((item, index) => (
               <div key={index} className="flex items-center gap-5">
-                <div className="h-32 w-32 shrink-0 rounded-full text-white">
+                <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
                   <img
                     draggable="false"
                     src={item.picture_xl}
                     alt={item.name}
-                    className="h-32 w-32 rounded-full"
+                    className="rounded-full object-cover xl:h-32 xl:w-32"
                   />
                 </div>
 
                 <div className="text-white">
                   <Link to={`/artist/${item.id}`}>
-                    <h1 className="cursor-pointer text-xl font-bold">
+                    <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
                       {item.name}
                     </h1>
                   </Link>
-                  <h2 className="text-lg text-gray-400 capitalize">
+                  <h2 className="text-gray-400 capitalize xl:text-lg">
                     {item.type}
                   </h2>
                   <h2 className="text-gray-400">{item.role}</h2>
@@ -96,25 +102,27 @@ const SongDetails = () => {
         </div>
 
         <div className="mt-15">
-          <h1 className="mb-8 text-3xl font-bold text-white">Artist</h1>
+          <h1 className="mb-8 text-2xl font-bold text-white xl:text-3xl">
+            Artist
+          </h1>
 
           <div className="flex items-center gap-5">
-            <div className="h-32 w-32 shrink-0 rounded-full text-white">
+            <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
               <img
                 draggable="false"
                 src={songData.artist.picture_xl}
                 alt={songData.artist.name}
-                className="h-32 w-32 rounded-full"
+                className="rounded-full object-cover xl:h-32 xl:w-32"
               />
             </div>
 
             <div className="text-white">
               <Link to={`/artist/${songData.artist.id}`}>
-                <h1 className="cursor-pointer text-xl font-bold">
+                <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
                   {songData.artist.name}
                 </h1>
               </Link>
-              <h2 className="text-lg text-gray-400 capitalize">
+              <h2 className="text-gray-400 capitalize xl:text-lg">
                 {songData.artist.type}
               </h2>
             </div>
@@ -122,27 +130,29 @@ const SongDetails = () => {
         </div>
 
         <div className="mt-15">
-          <h1 className="mb-8 text-3xl font-bold text-white">Album</h1>
+          <h1 className="mb-8 text-2xl font-bold text-white xl:text-3xl">
+            Album
+          </h1>
 
           <div className="flex items-center gap-5">
-            <div className="h-32 w-32 shrink-0 rounded-full text-white">
+            <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
               <img
                 draggable="false"
                 src={songData.album.cover_xl}
                 alt={songData.album.title}
-                className="h-32 w-32 rounded-full"
+                className="rounded-full object-cover xl:h-32 xl:w-32"
               />
             </div>
 
             <div className="text-white">
               <Link to={`/album/${songData.album.id}`}>
-                <h1 className="cursor-pointer text-xl font-bold">
+                <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
                   {songData.album.title}
                 </h1>
               </Link>
-              <h2 className="mt-2 text-lg">
-                Released on{" "}
-                <span className="ml-1 text-base text-gray-400">
+              <h2 className="mt-2 xl:text-lg">
+                Released on <br className="block xl:hidden" />
+                <span className="ml-1 text-sm text-gray-400 xl:text-base">
                   {songData.album.release_date}
                 </span>
               </h2>

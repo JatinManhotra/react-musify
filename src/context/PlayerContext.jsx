@@ -18,7 +18,7 @@ export const PlayerContext = createContext();
 const PlayerContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [showSidebar, setShowSidebar] = useState(false)
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const playlistIds = [3155776842, 1313621735];
 
@@ -33,21 +33,34 @@ const PlayerContextProvider = ({ children }) => {
   const scrollableDivRef4 = useRef();
   const audioRef = useRef();
 
-  const { data: top10data, isFetching: top10Fetching, error: top10Error } = useGetTop10SongsQuery();
+  const {
+    data: top10data,
+    isFetching: top10Fetching,
+    error: top10Error,
+  } = useGetTop10SongsQuery();
 
-  const { data: albumsData, isFetching:albumsFetching } = useGetPlaylistsQuery(playlistIds[0]);
+  const {
+    data: albumsData,
+    isFetching: albumsFetching,
+    error: albumsError,
+  } = useGetPlaylistsQuery(playlistIds[0]);
   const topChartsSongs = albumsData?.tracks?.data.slice(0, 5);
   const albums = albumsData?.tracks?.data.slice(0, 10);
 
   const playlistQuery = playlistIds.map((item) => useGetPlaylistsQuery(item));
   const playlistData = playlistQuery.map((item) => item.data);
   const playlistFetching = playlistQuery[1].isFetching;
+  const playlistError = playlistQuery[1].error;
 
   const { data: artist1 } = useGetArtistQuery(topChartsSongs?.[0].artist.id);
   const { data: artist2 } = useGetArtistQuery(topChartsSongs?.[1].artist.id);
   const { data: artist3 } = useGetArtistQuery(topChartsSongs?.[2].artist.id);
   const { data: artist4 } = useGetArtistQuery(topChartsSongs?.[3].artist.id);
-  const { data: artist5, isFetching: artistFetching } = useGetArtistQuery(topChartsSongs?.[4].artist.id);
+  const {
+    data: artist5,
+    isFetching: artistFetching,
+    error: artistError,
+  } = useGetArtistQuery(topChartsSongs?.[4].artist.id);
 
   function dragDiv(e, ref) {
     if (!dragging) return;
@@ -156,7 +169,12 @@ const PlayerContextProvider = ({ children }) => {
         top10Error,
         playlistFetching,
         albumsFetching,
-        artistFetching,showSidebar, setShowSidebar
+        artistFetching,
+        showSidebar,
+        setShowSidebar,
+        albumsError,
+        playlistError,
+        artistError,
       }}
     >
       {children}

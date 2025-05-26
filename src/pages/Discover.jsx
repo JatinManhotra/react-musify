@@ -5,6 +5,7 @@ import { PlayerContext } from "../context/PlayerContext";
 import { useSelector } from "react-redux";
 import SongCardSkeleton from "../skeleton/SongCardSkeleton";
 import DiscoverSkeleton from "../skeleton/DiscoverSkeleton";
+import ErrorPage from "./ErrorPage";
 
 const Discover = () => {
   const {
@@ -12,6 +13,8 @@ const Discover = () => {
     top10data,
     top10Fetching,
     top10Error,
+    albumsError,
+    playlistError,
     scrollableDivRef1,
     scrollableDivRef2,
     scrollableDivRef3,
@@ -27,6 +30,10 @@ const Discover = () => {
 
   if (top10Fetching || albumsFetching || playlistFetching) {
     return <DiscoverSkeleton />;
+  }
+
+  if(top10Error || albumsError || playlistError){
+    return <ErrorPage/>
   }
 
   return (
@@ -91,7 +98,7 @@ const Discover = () => {
         {playlistData?.map((item, index) => (
           <div
             key={item?.id || index}
-            className="min-w-[12rem] xl:min-w-[15rem]" 
+            className="min-w-[12rem] xl:min-w-[15rem]"
           >
             <SongCard
               image={item?.picture_xl}

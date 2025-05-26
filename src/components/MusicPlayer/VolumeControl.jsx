@@ -5,7 +5,7 @@ import { FaVolumeDown, FaVolumeOff, FaVolumeUp } from 'react-icons/fa';
 const VolumeControl = () => {
 
     const { audioRef } = useContext(PlayerContext);
-    const [volume, setVolume] = useState(0.5);
+    const [volume, setVolume] = useState(1);
     const [VolumeIcon, setVolumeIcon] = useState(()=>FaVolumeDown);
 
     function handleVolume(e){
@@ -29,7 +29,7 @@ const VolumeControl = () => {
 
 
   return (
-    <div className='flex gap-2 max-w-[20rem] w-full items-center justify-end'>
+    <div className='hidden xl:flex gap-2 max-w-[20rem] w-full items-center justify-end'>
         <VolumeIcon className='text-white text-3xl'/>
         <input type="range" min={0} step={0.01} max={1} value={volume} onChange={handleVolume} name="volume-range" id="volume-range" className='w-30 custom-range'/>
     </div>

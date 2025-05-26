@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setSearchResults } from "../redux/slice/playerSlice";
 import { PlayerContext } from "../context/PlayerContext";
 import SongCard from "../components/SongCard";
 import SearchResultsSkeleton from "../skeleton/SearchResultsSkeleton";
+import PlayPause from "../components/PlayPause";
+import ErrorPage from "./ErrorPage";
 
 const SearchResults = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const { setInput, setSearchQuery } = useContext(PlayerContext);
+  const { currentSongID, isPlaying } = useSelector((state) => state.player);
 
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("q");
@@ -25,58 +28,78 @@ const SearchResults = () => {
     setInput("");
   }
 
- if(searchResultsStatus?.isFetching){
-  return <SearchResultsSkeleton/>
- }
+  if (searchResultsStatus?.isFetching) {
+    return <SearchResultsSkeleton />;
+  }
+
+  if(searchResultsStatus?.error){
+    return <ErrorPage/>
+  }
 
   return searchResults?.data?.length > 0 ? (
     <>
-      <div className="absolute top-20 left-55 mb-4 flex items-center gap-4">
+      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
         <IoIosArrowRoundBack
-          className="cursor-pointer rounded-full border-2 border-white text-gray-400"
-          size={40}
+          className="cursor-pointer rounded-full border-2 border-white text-3xl text-gray-400 xl:text-4xl"
           onClick={handleBackBtn}
         />
-        <p className="text-xl text-white">Back</p>
+        <p className="text-lg text-white xl:text-xl">Back</p>
       </div>
 
-      <section className="hide-scrollbar animate-left absolute top-35 left-55 h-[78%] w-[84%] overflow-y-scroll pb-10">
-        <h1 className="mt-8 mb-8 text-3xl font-bold text-white">
+      <section className="hide-scrollbar animate-left overflow-y-scroll px-2 pb-10 xl:absolute xl:top-35 xl:left-55 xl:h-[78%] xl:w-[84%]">
+        <h1 className="mt-8 mb-8 px-2 text-2xl font-bold text-white xl:text-3xl">
           Showing results for <span className="italic">"{searchQuery}"</span>
         </h1>
 
-        <div className="flex w-full flex-wrap gap-5">
+        <div>
           {searchResults.data?.map((item, index) => (
-            <SongCard
-              key={item?.id || index}
-              image={item?.md5_image}
-              title={item?.title}
-              artist={item?.artist?.name}
-              artistId={item.artist.id}
-              index={index}
-              preview={item?.preview}
-              songID={item?.id}
-              songList={searchResults.data}
-              song
-              strictWidth
-            />
+            <div
+              key={index}
+              className={`mt-2 flex items-center justify-between rounded-lg px-2 py-2 text-white xl:px-4 xl:pr-8 xl:hover:bg-[#4b456e] ${item.id === currentSongID && isPlaying ? "bg-[#4b456e]" : ""}`}
+            >
+              <div className="flex items-center gap-4">
+                <p>{index + 1}.</p>
+                <img
+                  className="w-12 rounded-lg xl:w-15"
+                  src={`https://e-cdns-images.dzcdn.net/images/cover/${item?.md5_image}/1000x1000.jpg`}
+                  alt="topCharts"
+                />
+                <div>
+                  <Link to={`/song/${item.id}`}>
+                    <h2 className="w-35 truncate text-sm font-bold xl:text-lg">
+                      {item?.title}
+                    </h2>
+                  </Link>
+                  <Link to={`/artist/${item.artist.id}`}>
+                    <h3 className="w-35 truncate text-xs text-gray-300 xl:text-sm">
+                      {item?.artist?.name}
+                    </h3>
+                  </Link>
+                </div>
+              </div>
+              <PlayPause
+                topCharts
+                preview={item.preview}
+                songID={item.id}
+                songList={searchResults.data}
+              />
+            </div>
           ))}
         </div>
       </section>
     </>
   ) : (
     <>
-      <div className="absolute top-20 left-55 mb-4 flex items-center gap-4">
+     <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
         <IoIosArrowRoundBack
-          className="cursor-pointer rounded-full border-2 border-white text-gray-400"
-          size={40}
+          className="cursor-pointer rounded-full border-2 border-white text-3xl text-gray-400 xl:text-4xl"
           onClick={handleBackBtn}
         />
-        <p className="text-xl text-white">Back</p>
+        <p className="text-lg text-white xl:text-xl">Back</p>
       </div>
 
-      <section className="hide-scrollbar absolute top-35 left-55 h-[78%] w-[84%] overflow-y-scroll pb-10">
-        <h1 className="mt-8 mb-8 text-3xl font-bold text-white">
+      <section className="hide-scrollbar animate-left overflow-y-scroll px-2 pb-10 xl:absolute xl:top-35 xl:left-55 xl:h-[78%] xl:w-[84%]">
+        <h1 className="mt-8 px-2  mb-8 text-2xl xl:text-3xl font-bold text-white">
           No results for <span className="italic">"{searchQuery}"</span>
         </h1>
       </section>

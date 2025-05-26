@@ -12,7 +12,8 @@ import { IoMdMenu } from "react-icons/io";
 
 const NavbarSkeleton = () => {
   return (
-    <nav className="absolute top-5 left-55 h-9 w-[30rem] rounded-full border-2 border-gray-600 bg-transparent px-2 py-1"></nav>
+    
+    <nav className="mt-4 h-8 ml-2.5 w-[80%] rounded-full border-2 border-gray-600 bg-transparent px-2 py-1 text-sm xl:absolute xl:top-5 xl:left-55 xl:w-[30rem]"></nav>
   );
 };
 
