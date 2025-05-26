@@ -15,7 +15,7 @@ export const deezerApi = createApi({
     endpoints: (builder)=>({
         getTop10Songs : builder.query({
             query : ()=> ({
-                url: "https://proxy.corsfix.com/?https://api.deezer.com/chart/0/tracks",
+                url: "https://cors-anywhere-d5f1.onrender.com/https://api.deezer.com/chart/0/tracks",
                 method: "GET"
             })
         }),
@@ -23,10 +23,7 @@ export const deezerApi = createApi({
             query: (albumId)=> `/album/${albumId}`
         }),
         getPlaylists : builder.query({
-            query : (playlistId)=> ({
-                url: `https://proxy.corsfix.com/?https://api.deezer.com/playlist/${playlistId}`,
-                method: "GET"
-            })
+            query: (playlistId)=> `/playlist/${playlistId}`
         }),
         getArtist : builder.query({
             query: (artistId)=> `/artist/${artistId}`
