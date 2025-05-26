@@ -2,6 +2,7 @@ import React from "react";
 import PlayPause from "./PlayPause";
 import { Link, useParams } from "react-router-dom";
 import SongCardSkeleton from "../skeleton/SongCardSkeleton";
+import { useSelector } from "react-redux";
 
 const SongCard = ({
   image,
@@ -24,10 +25,12 @@ const SongCard = ({
   else if (album) route = `/album/${albumId}`;
   else route = `/playlist/${playlistId}`;
 
+
+
   return (
     <div
       key={index}
-      className={`${strictWidth ? "max-w-[12rem] xl:max-w-[15rem]" : "min-w-[12rem] xl:min-w-[15rem]"} rounded-lg bg-[#1f235c] p-4 shadow-sm shadow-black/50 transition-transform duration-200 active:scale-105 xl:hover:scale-105 `}
+      className={`${strictWidth ? "max-w-[12rem] xl:max-w-[15rem]" : "min-w-[12rem] xl:min-w-[15rem]"} rounded-lg bg-[#1f235c] p-4 shadow-sm shadow-black/50 transition-transform duration-200  xl:hover:scale-105 `}
     >
       <div className="group relative">
         <img

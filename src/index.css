@@ -6,7 +6,7 @@
 }
 
 @utility player-controls-tooltip{
-    @apply absolute text-xs xl:text-sm top-15 translate-y-[-1rem] opacity-0 group-hover:translate-y-[0] group-hover:opacity-100 group-active:translate-y-[0] group-active:opacity-100 transition-all duration-500 ease-in-out select-none
+    @apply absolute text-xs xl:text-sm top-15 translate-y-[-1rem] opacity-0 group-hover:translate-y-[0] group-hover:opacity-100 transition-all duration-700 ease-in-out select-none pointer-events-none
 }
 
 /* .hide-scrollbar::-webkit-scrollbar{
