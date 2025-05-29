@@ -12,10 +12,11 @@ const PlayerControls = () => {
     (state) => state.player,
   );
 
-  const { audioRef, dispatch, playNext } = useContext(PlayerContext);
+  const { audioRef, dispatch, showMsg, setShowMsg } = useContext(PlayerContext);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isRepeated, setIsRepeated] = useState(false);
+  const [showRepeatMsg, setShowRepeatMsg] = useState(false);
 
   function handleSeek(e) {
     const seekTime = parseFloat(e.target.value);
@@ -23,6 +24,15 @@ const PlayerControls = () => {
     setCurrentTime(seekTime);
     audioRef.current.play();
     dispatch(setPlaying({ isPlaying: true, songID: currentSongID }));
+  }
+
+  function handleToggle() {
+    setIsRepeated((prev) => !prev);
+    setShowRepeatMsg(true);
+
+    setTimeout(() => {
+      setShowRepeatMsg(false);
+    }, 1200);
   }
 
   useEffect(() => {
@@ -64,8 +74,8 @@ const PlayerControls = () => {
 
   return (
     <>
-      <div className="flex w-[60%]  xl:w-full flex-1 flex-col-reverse items-center justify-center gap-3">
-        <div className="flex  items-center gap-2 text-white">
+      <div className="flex w-[60%] flex-1 flex-col-reverse items-center justify-center gap-3 xl:gap-2 sm:pb-4 xl:w-full">
+        <div className="flex items-center gap-2 text-white">
           <p className="text-xs xl:text-base">
             0:
             {audioRef.current &&
@@ -81,21 +91,31 @@ const PlayerControls = () => {
             onChange={handleSeek}
             name="progress-bar"
             id="progress-bar"
-            className="custom-range w-55 xl:w-[30rem]"
+            className="custom-range w-55 sm:w-[19rem] md:w-[23rem] lg:w-[25rem] xl:w-[30rem]"
           />
-          <p className="text-xs xl:text-base">0:{audioRef.current && Math.round(audioRef.current.duration)}</p>
+          <p className="text-xs xl:text-base">
+            0:{audioRef.current && Math.round(audioRef.current.duration)}
+          </p>
         </div>
 
-        <div className="flex items-center gap-4 xl:gap-6 xl:text-xl text-white">
+        <div className="flex items-center gap-4 text-white sm:text-lg xl:gap-6 xl:text-xl">
           <Loop currentTime={currentTime} setCurrentTime={setCurrentTime} />
           <div className="group flex flex-col items-center">
             <FaRepeat
-              onClick={() => setIsRepeated(!isRepeated)}
-              className={`${isRepeated ? "text-rose-500" : "text-white"} cursor-pointer`}
+              onClick={handleToggle}
+              className={`${isRepeated ? "text-rose-400" : "text-white"} cursor-pointer`}
             />
-            <p className="player-controls-tooltip">
-              {isRepeated ? "Repeat On" : "Repeat Off"}
-            </p>
+
+            <div
+              className={`player-controls-tooltip ${showRepeatMsg ? "opacity-100" : "opacity-0"}`}
+            >
+              <h3>
+                Repeat{" "}
+                <span className="text-rose-400">
+                  {isRepeated ? "On" : "Off"}
+                </span>
+              </h3>
+            </div>
           </div>
           <PlayPause />
           <Shuffle />

@@ -42,7 +42,7 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<Discover />} />
-          <Route path="/song/:id" element={<SongDetails />} />
+          <Route path="/song/:id" element={<SongDetails/>} />
           <Route path="/artist/:id" element={<ArtistDetails />} />
           <Route path="/artist/:id/songs" element={<ArtistSongs />} />
           <Route path="/album/:id" element={<AlbumDetails />} />
@@ -53,7 +53,7 @@ const App = () => {
 
         {showSideComponents && (
           <section
-            className={`hide-scrollbar overflow-y-scroll p-2 xl:absolute xl:top-10 xl:right-5 xl:bottom-5 xl:p-0 ${top10Error || albumsError || playlistError ? "hidden" : "block"}`}
+            className={`hide-scrollbar  overflow-y-scroll p-2 sm:ml-[13rem] xl:ml-0 sm:p-0 sm:pr-4 xl:absolute  xl:top-10 xl:right-2 2xl:right-5 xl:bottom-5 xl:p-0 ${top10Error || albumsError || playlistError ? "hidden" : "block"}`}
           >
             <TopCharts />
             <TopArtists />
@@ -65,7 +65,7 @@ const App = () => {
 
       <footer>
         <section className="fixed right-0 bottom-0 left-0 z-50 bg-blue-500">
-          <h3 className="flex text-sm items-center justify-center gap-2">
+          <h3 className="flex items-center justify-center gap-2 text-sm">
             Made with <FaHeart className="text-rose-500" /> by{" "}
             <a
               className="hover:text-white"

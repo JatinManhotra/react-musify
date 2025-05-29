@@ -19,6 +19,7 @@ const PlayerContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
 
   const playlistIds = [3155776842, 1313621735];
 
@@ -174,7 +175,7 @@ const PlayerContextProvider = ({ children }) => {
         setShowSidebar,
         albumsError,
         playlistError,
-        artistError,
+        artistError,showMsg, setShowMsg
       }}
     >
       {children}

@@ -8,7 +8,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const SidebarSkeleton = () => {
   return (
-    <aside className="hidden xl:block absolute top-0 bottom-0 left-0 w-[12rem] bg-[#141414] p-4"></aside>
+    <aside className="absolute top-0 bottom-0 left-0 hidden w-[12rem] bg-[#141414] p-4 sm:block z-50"></aside>
   );
 };
 
@@ -40,14 +40,14 @@ const Sidebar = () => {
     <>
       <section
         onClick={() => setShowSidebar(false)}
-        className={`absolute top-0 bottom-0 left-0 h-screen z-50 w-screen bg-black/50 transition-opacity duration-300 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 h-screen w-screen bg-black/50 transition-opacity duration-300 sm:hidden ${
           showSidebar
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         }`}
       >
         <aside
-          className={`absolute top-0 bottom-0 w-[12rem] bg-[#141414] transition-all duration-300 xl:hidden ${
+          className={`fixed top-0 bottom-0 w-[12rem] bg-[#141414] transition-all duration-300 sm:hidden ${
             showSidebar ? "left-0" : "-left-[12rem]"
           }`}
         >
@@ -60,7 +60,7 @@ const Sidebar = () => {
               <h1 className="text-2xl font-bold text-white">Musify</h1>
             </div>
 
-            <div className="mt-15 ml-10 text-lg text-gray-400 hover:cursor-pointer hover:text-cyan-400">
+            <div className="mt-15 ml-10 text-gray-400 hover:cursor-pointer hover:text-cyan-400 ">
               <Link onClick={handleHomeBtn} to={"/"}>
                 <h2 className="flex items-center gap-2">
                   <GoHome /> <p>Discover</p>
@@ -71,13 +71,13 @@ const Sidebar = () => {
         </aside>
       </section>
 
-      <aside className="absolute top-0 bottom-0 left-0 hidden w-[12rem] bg-[#141414] p-4 xl:block">
+      <aside className="fixed top-0 bottom-0 left-0 z-50 hidden w-[12rem] bg-[#141414] p-4 sm:block">
         <div className="mt-4 flex items-center justify-center gap-2 hover:cursor-pointer">
           <img className="w-12" src={logo} alt="Musify logo" />
-          <h1 className="text-3xl font-bold text-white">Musify</h1>
+          <h1 className="text-2xl 2xl:text-3xl font-bold text-white">Musify</h1>
         </div>
 
-        <div className="mt-15 ml-4 text-lg text-gray-400 hover:cursor-pointer hover:text-cyan-400">
+        <div className="mt-15 ml-4 text-base lg:text-lg text-gray-400 hover:cursor-pointer hover:text-cyan-400">
           <Link onClick={handleHomeBtn} to={"/"}>
             <h2 className="flex items-center gap-2">
               <GoHome /> <p>Discover</p>

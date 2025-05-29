@@ -29,9 +29,9 @@ const VolumeControl = () => {
 
 
   return (
-    <div className='hidden xl:flex gap-2 max-w-[20rem] w-full items-center justify-end'>
-        <VolumeIcon className='text-white text-3xl'/>
-        <input type="range" min={0} step={0.01} max={1} value={volume} onChange={handleVolume} name="volume-range" id="volume-range" className='w-30 custom-range'/>
+    <div className='hidden lg:flex gap-2 lg:max-w-[10rem] xl:max-w-[20rem] w-full items-center justify-end'>
+        <VolumeIcon className='text-white text-2xl xl:text-3xl'/>
+        <input type="range" min={0} step={0.01} max={1} value={volume} onChange={handleVolume} name="volume-range" id="volume-range" className='lg:w-28 xl:w-30 custom-range'/>
     </div>
   )
 }

@@ -9,8 +9,9 @@ const Loop = ({ currentTime, setCurrentTime }) => {
   const { isPlaying, currentSongID, previewUrl, currentSongsList } =
     useSelector((state) => state.player);
 
-  const { audioRef, dispatch, playNext } = useContext(PlayerContext);
+  const { audioRef, dispatch, showMsg, setShowMsg } = useContext(PlayerContext);
   const [isLoop, setIsLoop] = useState(false);
+  const [showLoopMsg, setShowLoopMsg] = useState(false);
 
   useEffect(() => {
     if (
@@ -64,15 +65,29 @@ const Loop = ({ currentTime, setCurrentTime }) => {
     currentSongsList,
   ]);
 
+  function handleToggle() {
+    setIsLoop(prev => !prev);
+    setShowLoopMsg(true)
+
+    setTimeout(() => {
+      setShowLoopMsg(false);
+    }, 1200);
+  }
+
   return (
     <div className="group flex flex-col items-center">
       <ImLoop
-        onClick={() => setIsLoop(!isLoop)}
-        className={`${isLoop ? "text-rose-500" : "text-white"} cursor-pointer`}
+        onClick={handleToggle}
+        className={`${isLoop ? "text-rose-400" : "text-white"} cursor-pointer`}
       />
-      <p className="player-controls-tooltip">
-        {isLoop ? "Loop On" : "Loop Off"}
-      </p>
+
+      <div
+        className={`player-controls-tooltip ${showLoopMsg ? "opacity-100" : "opacity-0"}`}
+      >
+        <h3>
+           Loop <span className="text-rose-400">{isLoop ? "On" : "Off"}</span>
+        </h3>
+      </div>
     </div>
   );
 };

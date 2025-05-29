@@ -13,7 +13,7 @@ import { IoMdMenu } from "react-icons/io";
 const NavbarSkeleton = () => {
   return (
     
-    <nav className="mt-4 h-8 ml-2.5 w-[80%] rounded-full border-2 border-gray-600 bg-transparent px-2 py-1 text-sm xl:absolute xl:top-5 xl:left-55 xl:w-[30rem]"></nav>
+    <nav className="mt-4 xl:ml-0 xl:mt-0 sm:ml-[13rem] sm:w-[26rem]  h-8 ml-2.5 w-[80%] rounded-full border-2 border-gray-600 bg-transparent px-2 py-1 text-sm xl:absolute xl:top-5 xl:left-55 xl:w-[30rem]"></nav>
   );
 };
 
@@ -63,8 +63,8 @@ const Navbar = () => {
 
   return (
     <>
-      <section className="mt-4 flex items-center justify-between">
-        <nav className="mx-auto w-[80%] rounded-full border-2 border-gray-600 bg-transparent px-2 py-1 text-sm xl:absolute xl:top-5 xl:left-55 xl:w-[30rem]">
+      <section className="pt-4 flex items-center justify-between">
+        <nav className="mx-auto w-[80%] sm:ml-[13rem] xl:ml-0 rounded-full border-2 border-gray-600 bg-transparent px-2 py-1 text-sm xl:absolute xl:top-5 xl:left-55 sm:w-[26rem] xl:w-[30rem]">
           <div className="flex items-center gap-2 text-gray-200">
             <CiSearch className="text-lg xl:text-2xl" />
             <input
@@ -79,7 +79,7 @@ const Navbar = () => {
             />
           </div>
         </nav>
-        <IoMdMenu onClick={()=>setShowSidebar(true)} size={30} className="mr-3 text-white" />
+        <IoMdMenu onClick={()=>setShowSidebar(true)} size={30} className="mr-3 text-white sm:hidden " />
       </section>
     </>
   );

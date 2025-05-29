@@ -6,20 +6,21 @@
 }
 
 @utility player-controls-tooltip{
-    @apply absolute text-xs xl:text-sm top-15 translate-y-[-1rem] opacity-0 group-hover:translate-y-[0] group-hover:opacity-100 transition-all duration-700 ease-in-out select-none pointer-events-none
+    @apply fixed bottom-35 left-[50%] z-50 translate-x-[-50%] rounded-4xl text-sm lg:text-base bg-gradient-to-tr from-[#2a2a80] to-black/20 px-5 py-3 transition-opacity duration-500
 }
 
-/* .hide-scrollbar::-webkit-scrollbar{
+.hide-scrollbar::-webkit-scrollbar{
     display: none;
 }
 
 html::-webkit-scrollbar{
     display: none;
-} */
+}
 
 *{
     box-sizing: border-box;
     font-family: outfit, sans-serif;
+    /* outline: 1px solid red; */
 }
 
 body{

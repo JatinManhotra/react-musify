@@ -4,11 +4,11 @@ import SongCardSkeleton from "./SongCardSkeleton";
 const ArtistDetailsSkeleton = () => {
   return (
     <>
-      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
+      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 sm:ml-[12rem] xl:absolute xl:top-20 xl:left-55 xl:mt-0 xl:ml-0">
         <div className="h-6 w-30 animate-pulse rounded-2xl bg-gray-800 xl:h-10 xl:w-40"></div>
       </div>
 
-      <section className="hide-scrollbar mt-4 overflow-y-scroll px-4 xl:absolute xl:top-20 xl:left-55 xl:h-[78%] xl:w-[83%]">
+      <section className="hide-scrollbar mt-4 overflow-y-scroll px-4 sm:ml-[12rem] xl:absolute xl:top-30 xl:left-55 xl:ml-0 xl:h-[calc(100vh_-_12rem)] xl:w-[82%] 2xl:top-30">
         <div className="flex items-center gap-5">
           <div className="h-30 w-30 animate-pulse rounded-full bg-gray-800 xl:h-40 xl:w-40"></div>
           <div>

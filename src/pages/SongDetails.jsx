@@ -16,13 +16,13 @@ const SongDetails = () => {
     return <SongDetailsSkeleton />;
   }
 
-  if(error){
-    return <ErrorPage/>
+  if (error) {
+    return <ErrorPage />;
   }
 
   return songData ? (
     <>
-      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 xl:absolute xl:top-20 xl:left-55">
+      <div className="mt-6 mb-4 flex items-center gap-4 pl-4 sm:ml-[12rem] xl:absolute xl:top-20 xl:left-55 xl:mt-0 xl:ml-0">
         <IoIosArrowRoundBack
           className="cursor-pointer rounded-full border-2 border-white text-3xl text-gray-400 xl:text-4xl"
           onClick={() => navigate(-1)}
@@ -30,34 +30,35 @@ const SongDetails = () => {
         <p className="text-lg text-white xl:text-xl">Back</p>
       </div>
 
-      <section className="hide-scrollbar animate-left overflow-y-scroll px-4 pb-10 xl:absolute xl:top-35 xl:left-55 xl:h-[78%] xl:w-[83%]">
+      <section className="hide-scrollbar animate-left sm:ml-[12rem] overflow-y-scroll px-4 pb-10 xl:absolute xl:top-35 xl:left-55 xl:ml-0 xl:h-[calc(100vh_-_12rem)] xl:w-[82%]">
         <div className="flex items-center gap-5">
-          <div className="group relative w-full max-w-30 rounded-full text-white xl:h-40 xl:w-40">
+          <div className="group relative w-full max-w-30 rounded-full text-white lg:h-35 lg:w-35 lg:max-w-fit xl:h-40 xl:w-40">
             <img
               draggable="false"
               src={`https://e-cdns-images.dzcdn.net/images/cover/${songData.md5_image}/1000x1000.jpg`}
               alt={songData.title}
-              className="rounded-full border-4 border-white object-cover xl:h-40 xl:w-40"
+              className="rounded-full border-4 border-white object-cover lg:h-35 lg:w-35 xl:h-40 xl:w-40"
             />
             <PlayPause
               songID={songData.id}
               preview={songData.preview}
               songCard
+              rounded
             />
           </div>
 
           <div>
-            <h1 className="mb-2 text-lg font-bold text-white xl:text-3xl">
+            <h1 className="mb-2 text-lg font-bold text-white lg:text-xl xl:text-3xl">
               {songData.title}
             </h1>
-            <h2 className="mb-2 text-white xl:text-xl">
-              Released on <br className="block xl:hidden" />
-              <span className="ml-1 text-sm text-gray-400 xl:text-lg">
+            <h2 className="mb-2 text-white lg:text-lg xl:text-xl">
+              Released on <br className="block sm:hidden" />
+              <span className="ml-1 text-sm text-gray-400 lg:text-base xl:text-lg">
                 {" "}
                 {songData.release_date}
               </span>
             </h2>
-            <h3 className="text-white xl:text-lg">
+            <h3 className="text-white lg:text-base xl:text-lg">
               Rank{" "}
               <span className="ml-1 text-sm text-gray-400 xl:text-base">
                 {songData.rank}
@@ -76,18 +77,18 @@ const SongDetails = () => {
           <div className="flex flex-wrap gap-10">
             {songData.contributors?.map((item, index) => (
               <div key={index} className="flex items-center gap-5">
-                <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
+                <div className="w-full max-w-25 shrink-0 rounded-full text-white lg:h-30 lg:w-30 lg:max-w-fit xl:h-32 xl:w-32">
                   <img
                     draggable="false"
                     src={item.picture_xl}
                     alt={item.name}
-                    className="rounded-full object-cover xl:h-32 xl:w-32"
+                    className="rounded-full object-cover lg:h-30 lg:w-30 xl:h-32 xl:w-32"
                   />
                 </div>
 
                 <div className="text-white">
                   <Link to={`/artist/${item.id}`}>
-                    <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
+                    <h1 className="cursor-pointer text-lg font-bold lg:text-xl">
                       {item.name}
                     </h1>
                   </Link>
@@ -107,18 +108,18 @@ const SongDetails = () => {
           </h1>
 
           <div className="flex items-center gap-5">
-            <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
+            <div className="w-full max-w-25 shrink-0 rounded-full text-white lg:h-30 lg:w-30 lg:max-w-fit xl:h-32 xl:w-32">
               <img
                 draggable="false"
                 src={songData.artist.picture_xl}
                 alt={songData.artist.name}
-                className="rounded-full object-cover xl:h-32 xl:w-32"
+                className="rounded-full object-cover lg:h-30 lg:w-30 xl:h-32 xl:w-32"
               />
             </div>
 
             <div className="text-white">
               <Link to={`/artist/${songData.artist.id}`}>
-                <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
+                <h1 className="cursor-pointer text-lg font-bold lg:text-xl">
                   {songData.artist.name}
                 </h1>
               </Link>
@@ -135,23 +136,23 @@ const SongDetails = () => {
           </h1>
 
           <div className="flex items-center gap-5">
-            <div className="w-full max-w-25 shrink-0 rounded-full text-white xl:h-32 xl:w-32">
+            <div className="w-full max-w-25 shrink-0 rounded-full text-white lg:h-30 lg:w-30 lg:max-w-fit xl:h-32 xl:w-32">
               <img
                 draggable="false"
                 src={songData.album.cover_xl}
                 alt={songData.album.title}
-                className="rounded-full object-cover xl:h-32 xl:w-32"
+                className="rounded-full object-cover lg:h-30 lg:w-30 xl:h-32 xl:w-32"
               />
             </div>
 
             <div className="text-white">
               <Link to={`/album/${songData.album.id}`}>
-                <h1 className="cursor-pointer text-lg font-bold xl:text-xl">
+                <h1 className="cursor-pointer text-lg font-bold lg:text-xl">
                   {songData.album.title}
                 </h1>
               </Link>
               <h2 className="mt-2 xl:text-lg">
-                Released on <br className="block xl:hidden" />
+                Released on <br className="block sm:hidden" />
                 <span className="ml-1 text-sm text-gray-400 xl:text-base">
                   {songData.album.release_date}
                 </span>
